@@ -38,28 +38,22 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
     double distance = 0;
 
     public static PlaceInformation[] places = new PlaceInformation[]{
-        new PlaceInformation("Bách Khoa Hà Nội", 21.005106, 105.843371, 300.13, 88.88, 1200, 8,"GOOD" ),
-        new PlaceInformation("Phương Mai Hà Nội", 21.004224, 105.839673, 300.13, 88.88, 1200, 9,"GOOD" ),
-        new PlaceInformation("Đống Đa Hà Nội", 21.009368, 105.824322, 300.13, 88.88, 1200, 4,"BAD" ),
-        new PlaceInformation("Giáp Bát Hà Nội", 20.983507, 105.841220, 300.13, 88.88, 1200, 2,"BAD" ),
-        new PlaceInformation("Long Biên Hà Nội", 21.018348, 105.882664, 300.13, 88.88, 1200, 7, "GOOD" ),
-        new PlaceInformation("Hoàng Mai Hà Nội", 20.970246, 105.846137, 300.13, 88.88, 1200, 5, "BAD" ),
-        new PlaceInformation("Bạch Mai Hà Nội", 20.999733, 105.850519, 300.13, 88.88, 1200, 3,"BAD" ),
-        new PlaceInformation("Minh Khai Hà Nội", 20.995505, 105.856822, 300.13, 88.88, 1200, 6,"BAD" ),
+        new PlaceInformation("Mê Linh - Hà Nội", 21.184412, 105.702209, 300.13, 88.88, 1200, 8,"GOOD" ),
+        new PlaceInformation("Hoài Đức - Hà Nội", 21.028115, 105.695343, 300.13, 88.88, 1200, 8,"GOOD" ),
+        new PlaceInformation("Chương Mỹ - Hà Nội", 20.887683, 105.658264, 300.13, 88.88, 1200, 9,"GOOD" ),
+        new PlaceInformation("Phúc Yên - Vĩnh Phúc", 21.351421, 105.739288, 300.13, 88.88, 1200, 5,"BAD" ),
+        new PlaceInformation("Ý Yên - Nam Định", 20.332394, 106.010513, 300.13, 88.88, 1200, 6, "GOOD" ),
+        new PlaceInformation("Xuân Trường - Nam Định", 20.308569, 106.357956, 300.13, 88.88, 1200, 6, "BAD" ),
+        new PlaceInformation("Lạng Giang - Bắc Giang", 21.377639, 106.247406, 300.13, 88.88, 1200, 6,"GOOD" ),
+        new PlaceInformation("Từ Sơn - Bắc Ninh", 21.128067, 105.956268, 300.13, 88.88, 1200, 8,"BAD" ),
+        new PlaceInformation("Sóc Sơn - Hà Nội", 21.275298, 105.821686, 300.13, 88.88, 1200, 7,"BAD" ),
+        new PlaceInformation("Hiệp Hòa - Bắc Giang", 21.335432, 105.960388, 300.13, 88.88, 1200, 7,"BAD" ),
+        new PlaceInformation("Lập Thạch - Vĩnh Phúc", 21.433895, 105.437164, 300.13, 88.88, 1200, 5,"BAD" ),
+        new PlaceInformation("Vĩnh Bảo - Hải Phòng", 20.684184, 106.476059, 300.13, 88.88, 1200, 7,"BAD" ),
     };
 
     List<LatLng> latLngList = new ArrayList<>();
 
-    public static String[] locationList = new String[] {
-            "Bách Khoa Hà Nội",
-            "Phương Mai",
-            "Đống Đa",
-            "Giáp Bát",
-            "Long Biên",
-            "Hoàng Mai",
-            "Bạch Mai",
-            "Minh Khai"
-    };
 
     public float getDistance(LatLng my_latlong, LatLng frnd_latlong) {
 
@@ -87,6 +81,7 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if(searchView.getQuery() == null) return false;
                 String location = searchView.getQuery().toString();
                 List<Address> addressList = null;
                 Geocoder geocoder = new Geocoder((SubscribeMore.this));
@@ -98,7 +93,7 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 assert addressList != null;
                 Address address = addressList.get(0);
                 LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 
                 float minDistance = getDistance(latLng,latLngList.get(0));
                 int iDistance = 0;
@@ -111,7 +106,7 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 }
                 TextView textView = findViewById(R.id.nearest_place);
                 TextView tv = findViewById(R.id.place);
-                if(minDistance < 1000) {
+                if(minDistance < 25000) {
                     String text = "Your nearest location is";
                     textView.setText(text);
                     text = places[iDistance].getName();
@@ -128,6 +123,8 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 else {
                     String text = "Sorry! There are no places near the location you've chosen.";
                     textView.setText(text);
+                    tv.setText("");
+                    place = null;
                 }
                 return false;
             }
@@ -164,19 +161,19 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
         for(int i = 0; i < placesListLength; i++){
             LatLng latLng = new LatLng(places[i].getLatitude(), places[i].getLongtitude());
             latLngList.add(latLng);
-            mMap.addMarker(new MarkerOptions().position(latLng).title(locationList[i]).icon(BitmapDescriptorFactory.fromBitmap(iconMarker(places[i].getEvaluation()))));
+            mMap.addMarker(new MarkerOptions().position(latLng).title(places[i].getName()).icon(BitmapDescriptorFactory.fromBitmap(iconMarker(places[i].getEvaluation()))));
         }
         // Add a marker in Sydney and move the camera
         LatLng center = new LatLng(20.997823, 105.841030);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(center));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(center, 14));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(center, 9));
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onMapClick(LatLng latLng) {
                 //mMap.addMarker(new MarkerOptions().position(latLng).title("Your Location"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 
                 float minDistance = getDistance(latLng,latLngList.get(0));
                 int iDistance = 0;
@@ -189,7 +186,7 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 }
                 TextView textView = findViewById(R.id.nearest_place);
                 TextView tv = findViewById(R.id.place);
-                if(minDistance < 1000) {
+                if(minDistance < 25000) {
                     String text = "Your nearest location is";
                     textView.setText(text);
                     text = places[iDistance].getName();
@@ -206,6 +203,8 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 else {
                     String text = "Sorry! There are no places near the location you've chosen.";
                     textView.setText(text);
+                    tv.setText("");
+                    place = null;
                 }
             }
         });
