@@ -32,18 +32,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCb6k8-5L44lB9cSnQaonSwLX1s3GLXXck" />
 
-        <activity android:name=".HistoricWarining"
-            android:parentActivityName=".MainActivity"
-            android:label="HISTORIC WARNING"></activity>
         <activity android:name=".SubscribedList"
             android:parentActivityName=".MainActivity"
             android:label="SUBSCRIBED LIST"></activity>
         <activity android:name=".SubscribeMore"
             android:parentActivityName=".MainActivity"
             android:label="SUBSCRIBE MORE"></activity>
-        <activity android:name=".AirQuality"
+        <activity android:name=".Notifications"
+            android:parentActivityName=".MainActivity"
+            android:label="NOTIFICATIONS"></activity>
+        <activity android:name=".DetailedParameters"
             android:parentActivityName=".SubscribedList"
-            android:label="AIR QUALITY"></activity>
+            android:label="DetailedParameters"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

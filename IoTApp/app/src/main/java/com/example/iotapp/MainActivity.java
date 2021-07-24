@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SubscribeMore.class);
         startActivity(intent);
     }
-    public void historicWarningClick(View v)
+    public void notificationClick(View v)
     {
-        Toast t = Toast.makeText(this, "Opening Historic warning", Toast.LENGTH_SHORT);
+        Toast t = Toast.makeText(this, "Opening Notifications", Toast.LENGTH_SHORT);
         t.show();
-        Intent intent = new Intent(this, HistoricWarining.class);
+        Intent intent = new Intent(this, Notifications.class);
         startActivity(intent);
     }
 
