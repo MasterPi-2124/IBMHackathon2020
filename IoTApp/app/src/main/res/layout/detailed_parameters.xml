@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="10dp"
-        android:text="DETAILED PARAMETERS"
+        android:text="Địa điểm"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="12pt"
@@ -36,11 +36,46 @@
         android:layout_width="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/place_name"
+        app:layout_constraintBottom_toTopOf="@id/head"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="160dp"
+        app:srcCompat="@drawable/graph"
+        android:layout_marginTop="20dp"/>
+    <TableLayout
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/image"
         app:layout_constraintBottom_toTopOf="@id/layoutContent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/place" />
+        android:orientation="vertical"
+        android:layout_marginTop="0dp">
+
+    <TableRow>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:paddingTop="30dp"
+            android:text="THAM SỐ"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="10pt"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:paddingTop="30dp"
+            android:text="GIÁ TRỊ"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="10pt"
+            android:textStyle="bold" />
+    </TableRow>
+    </TableLayout>
 
     <LinearLayout
         android:id="@+id/layoutContent"
@@ -51,7 +86,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/place_name"
-        android:layout_marginTop="300dp">
+        android:layout_marginTop="270dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -67,77 +102,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <TableRow>
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="80dp"
-                            android:background="#ffffff"
-                            android:paddingTop="30dp"
-                            android:text="PARAMS"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="10pt"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="210dp"
-                            android:layout_height="80dp"
-                            android:background="#ffffff"
-                            android:paddingTop="30dp"
-                            android:text="VALUE"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="10pt"
-                            android:textStyle="bold" />
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:layout_width="130dp"
-                            android:layout_height="70dp"
-                            android:background="#ffffff"
-                            android:paddingTop="20dp"
-                            android:text="Temperature :"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="10pt"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:id="@+id/temperature_value"
-                            android:layout_width="150dp"
-                            android:layout_height="70dp"
-                            android:background="#ffffff"
-                            android:paddingTop="20dp"
-                            android:text="300.33 F"
-                            android:textAlignment="center"
-                            android:textColor="#877B7B"
-                            android:textSize="10pt"
-                            android:textStyle="bold" />
-                    </TableRow>
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="130dp"
-                            android:layout_height="70dp"
-                            android:background="#ffffff"
-                            android:paddingTop="20dp"
-                            android:text="Humidity :"
-                            android:textAlignment="center"
-                            android:textColor="#000000"
-                            android:textSize="10pt"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/humidity_value"
-                            android:layout_width="150dp"
-                            android:layout_height="70dp"
-                            android:background="#ffffff"
-                            android:paddingTop="20dp"
-                            android:text="85.1 %"
-                            android:textAlignment="center"
-                            android:textColor="#877B7B"
-                            android:textSize="10pt"
-                            android:textStyle="bold" />
-                    </TableRow>
                     <TableRow>
                         <TextView
                             android:layout_width="130dp"
@@ -164,11 +128,155 @@
                     </TableRow>
                     <TableRow>
                         <TextView
+                            android:layout_width="210dp"
+                            android:layout_height="70dp"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="Nhiệt độ :"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/temperature_value"
+                            android:layout_width="200dp"
+                            android:layout_height="70dp"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="300.33 *C"
+                            android:textAlignment="center"
+                            android:textColor="#877B7B"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
                             android:layout_width="130dp"
                             android:layout_height="70dp"
                             android:background="#ffffff"
                             android:paddingTop="20dp"
-                            android:text="Stability :"
+                            android:text="Độ ẩm :"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/humidity_value"
+                            android:layout_width="150dp"
+                            android:layout_height="70dp"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="85.1 %"
+                            android:textAlignment="center"
+                            android:textColor="#877B7B"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="70dp"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="Chiếu sáng :"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/chieu_sang"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="8,5 giờ"
+                            android:textAlignment="center"
+                            android:textColor="#877B7B"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="70dp"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="Góc mặt trời :"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/goc_mat_troi"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="60*50'"
+                            android:textAlignment="center"
+                            android:textColor="#877B7B"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="70dp"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="Lượng mưa :"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/luong_mua"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="50 mm"
+                            android:textAlignment="center"
+                            android:textColor="#877B7B"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="70dp"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="Tốc độ gió :"
+                            android:textAlignment="center"
+                            android:textColor="#000000"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/toc_do_gio"
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="5 m/s"
+                            android:textAlignment="center"
+                            android:textColor="#877B7B"
+                            android:textSize="10pt"
+                            android:textStyle="bold" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="130dp"
+                            android:layout_height="70dp"
+                            android:background="#ffffff"
+                            android:paddingTop="20dp"
+                            android:text="Độ ổn định :"
                             android:textAlignment="center"
                             android:textColor="#000000"
                             android:textSize="10pt"

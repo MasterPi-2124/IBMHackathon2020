@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingTop="10dp"
-            android:text="SUBSCRIBED LIST"
+            android:text="Địa điểm đã đăng ký"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="12pt"
@@ -54,7 +54,7 @@
         </ScrollView>
     </LinearLayout>
     <TextView
-            android:text="Click the card to view detailed parameters corresponding!"
+            android:text="Click vào địa điểm để xem thông tin chi tiết!"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView4"

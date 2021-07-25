@@ -38,18 +38,18 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
     double distance = 0;
 
     public static PlaceInformation[] places = new PlaceInformation[]{
-        new PlaceInformation("Mê Linh - Hà Nội", 21.184412, 105.702209, 300.13, 88.88, 1200, 8,"GOOD" ),
-        new PlaceInformation("Hoài Đức - Hà Nội", 21.028115, 105.695343, 300.13, 88.88, 1200, 8,"GOOD" ),
-        new PlaceInformation("Chương Mỹ - Hà Nội", 20.887683, 105.658264, 300.13, 88.88, 1200, 9,"GOOD" ),
-        new PlaceInformation("Phúc Yên - Vĩnh Phúc", 21.351421, 105.739288, 300.13, 88.88, 1200, 5,"BAD" ),
-        new PlaceInformation("Ý Yên - Nam Định", 20.332394, 106.010513, 300.13, 88.88, 1200, 6, "GOOD" ),
-        new PlaceInformation("Xuân Trường - Nam Định", 20.308569, 106.357956, 300.13, 88.88, 1200, 6, "BAD" ),
-        new PlaceInformation("Lạng Giang - Bắc Giang", 21.377639, 106.247406, 300.13, 88.88, 1200, 6,"GOOD" ),
-        new PlaceInformation("Từ Sơn - Bắc Ninh", 21.128067, 105.956268, 300.13, 88.88, 1200, 8,"BAD" ),
-        new PlaceInformation("Sóc Sơn - Hà Nội", 21.275298, 105.821686, 300.13, 88.88, 1200, 7,"BAD" ),
-        new PlaceInformation("Hiệp Hòa - Bắc Giang", 21.335432, 105.960388, 300.13, 88.88, 1200, 7,"BAD" ),
-        new PlaceInformation("Lập Thạch - Vĩnh Phúc", 21.433895, 105.437164, 300.13, 88.88, 1200, 5,"BAD" ),
-        new PlaceInformation("Vĩnh Bảo - Hải Phòng", 20.684184, 106.476059, 300.13, 88.88, 1200, 7,"BAD" ),
+        new PlaceInformation("Mê Linh - Hà Nội", 21.184412, 105.702209, 31.34, 84.44, 3.29, 10.78,85.4, 20,5,7,"TỐT" ),
+        new PlaceInformation("Hoài Đức - Hà Nội", 21.028115, 105.695343, 32.78, 85.18, 3.61, 11.23,85.7,5,7,8,"KÉM" ),
+        new PlaceInformation("Chương Mỹ - Hà Nội", 20.887683, 105.658264, 33.17, 84.57, 4.14,10.65,85.6, 15,5,9,"TỐT" ),
+        new PlaceInformation("Phúc Yên - Vĩnh Phúc", 21.351421, 105.739288, 33.28, 85.42, 2.31, 10.78,85.4, 20,5,5,"KÉM" ),
+        new PlaceInformation("Ý Yên - Nam Định", 20.332394, 106.010513, 32.59, 79.34,2.78,11.23,85.7,5,7, 6, "KÉM" ),
+        new PlaceInformation("Xuân Trường - Nam Định", 20.308569, 106.357956, 32.97, 79.51, 2.67, 10.65,85.6, 15,7,6, "KÉM" ),
+        new PlaceInformation("Lạng Giang - Bắc Giang", 21.377639, 106.247406, 32.32, 84.84, 2.85,10.78,85.4, 20,5, 6,"KÉM" ),
+        new PlaceInformation("Từ Sơn - Bắc Ninh", 21.128067, 105.956268, 32.84, 84.27, 3.52, 10.65,85.6, 15,7,8,"TỐT" ),
+        new PlaceInformation("Sóc Sơn - Hà Nội", 21.275298, 105.821686, 32.63, 84.28, 3.31,10.78,85.4, 20,6, 7,"KÉM" ),
+        new PlaceInformation("Hiệp Hòa - Bắc Giang", 21.335432, 105.960388, 32.89, 84.26, 3.17,10.78,85.4, 20,5, 7,"TỐT" ),
+        new PlaceInformation("Lập Thạch - Vĩnh Phúc", 21.433895, 105.437164, 32.67, 84.05, 2.36, 10.65,85.6, 15,7,5,"KÉM" ),
+        new PlaceInformation("Vĩnh Bảo - Hải Phòng", 20.684184, 106.476059, 33.75, 71.38, 3.14,10.78,85.4, 20,6, 7,"TỐT" ),
     };
 
     List<LatLng> latLngList = new ArrayList<>();
@@ -107,7 +107,7 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 TextView textView = findViewById(R.id.nearest_place);
                 TextView tv = findViewById(R.id.place);
                 if(minDistance < 25000) {
-                    String text = "Your nearest location is";
+                    String text = "Địa điểm gần nhất là";
                     textView.setText(text);
                     text = places[iDistance].getName();
                     tv.setText(text);
@@ -115,13 +115,13 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                     place = places[iDistance];
                     distance = (double)minDistance/1000.0;
                     if (!SubscribedList.subcribedList.contains(place)) {
-                        textView1.setText("Subscribe");
+                        textView1.setText("Đăng ký");
                     } else {
-                        textView1.setText("Unsubscribe");
+                        textView1.setText("Hủy đăng ký");
                     }
                 }
                 else {
-                    String text = "Sorry! There are no places near the location you've chosen.";
+                    String text = "Không có địa điểm nào gần hơn 20km";
                     textView.setText(text);
                     tv.setText("");
                     place = null;
@@ -187,7 +187,7 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 TextView textView = findViewById(R.id.nearest_place);
                 TextView tv = findViewById(R.id.place);
                 if(minDistance < 25000) {
-                    String text = "Your nearest location is";
+                    String text = "Địa điểm gần nhất là ";
                     textView.setText(text);
                     text = places[iDistance].getName();
                     tv.setText(text);
@@ -195,13 +195,13 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                     place = places[iDistance];
                     distance = (double)minDistance/1000.0;
                     if (!SubscribedList.subcribedList.contains(place)) {
-                        textView1.setText("Subscribe");
+                        textView1.setText("Đăng ký");
                     } else {
-                        textView1.setText("Unsubscribe");
+                        textView1.setText("Hủy đăng ký");
                     }
                 }
                 else {
-                    String text = "Sorry! There are no places near the location you've chosen.";
+                    String text = "Không có địa điểm nào gần hơn 20km!";
                     textView.setText(text);
                     tv.setText("");
                     place = null;
@@ -217,8 +217,8 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
         int len = SubscribedList.subcribedList.size();
         if(place != null && SubscribedList.subcribedList.contains(place)){
             sub = true;
-            textView.setText("Subscribe");
-            t = Toast.makeText(this, "Unsubscribed", Toast.LENGTH_SHORT);
+            textView.setText("Đăng ký");
+            t = Toast.makeText(this, "Đã hủy đăng ký", Toast.LENGTH_SHORT);
             List<Pair<PlaceInformation,Double>> tempList = new ArrayList<>();
             for(int i = 0; i < len; i++){
                 PlaceInformation location = SubscribedList.subcribedList.get(i);
@@ -237,13 +237,13 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
         }
         else if(place != null && !SubscribedList.subcribedList.contains(place)){
             sub = false;
-            textView.setText("Unsubscribe");
-            t = Toast.makeText(this, "Subscribed", Toast.LENGTH_SHORT);
+            textView.setText("Hủy đăng ký");
+            t = Toast.makeText(this, "Đã đăng ký", Toast.LENGTH_SHORT);
             SubscribedList.subcribedList.add(place);
             SubscribedList.distanceList.add(distance);
         }
         else{
-            t = Toast.makeText(this, "None", Toast.LENGTH_SHORT);
+            t = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         }
         t.show();
     }

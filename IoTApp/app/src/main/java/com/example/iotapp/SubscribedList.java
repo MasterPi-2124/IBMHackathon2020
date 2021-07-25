@@ -54,7 +54,7 @@ public class SubscribedList extends AppCompatActivity{
             TextView nameView = placeSubscribed.findViewById(R.id.place_name);
             nameView.setText(subcribedList.get(i).getName());
             TextView distanceView = placeSubscribed.findViewById(R.id.distance);
-            distanceView.setText(String.format("%.5f", distanceList.get(i)) + "km away");
+            distanceView.setText("Cách trạm đo " + String.format("%.5f", distanceList.get(i)) + "km");
             TextView ratedView = placeSubscribed.findViewById(R.id.rated);
             ratedView.setText(subcribedList.get(i).getEvaluation() +"/10");
             viewList.add(placeSubscribed);

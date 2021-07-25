@@ -15,7 +15,7 @@
             android:cropToPadding="true"/>
     <TextView
             android:id="@+id/place_name"
-            android:text="Places Here"
+            android:text="Địa điểm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif" android:textStyle="bold"
@@ -26,7 +26,7 @@
             android:layout_marginStart="40dp"/>
     <TextView
             android:id="@+id/distance"
-            android:text="1.83 km away"
+            android:text="cách trạm 2km"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="11sp"
