@@ -48,7 +48,7 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
         new PlaceInformation("Từ Sơn - Bắc Ninh", 21.128067, 105.956268, 32.84, 84.27, 3.52, 10.65,85.6, 15,7,8,"TỐT" ),
         new PlaceInformation("Sóc Sơn - Hà Nội", 21.275298, 105.821686, 32.63, 84.28, 3.31,10.78,85.4, 20,6, 7,"KÉM" ),
         new PlaceInformation("Hiệp Hòa - Bắc Giang", 21.335432, 105.960388, 32.89, 84.26, 3.17,10.78,85.4, 20,5, 7,"TỐT" ),
-        new PlaceInformation("Lập Thạch - Vĩnh Phúc", 21.433895, 105.437164, 32.67, 84.05, 2.36, 10.65,85.6, 15,7,5,"KÉM" ),
+        new PlaceInformation("Lập Thạch - Vĩnh Phúc", 21.433895, 105.437164, 32.67, 84.05, 2.36, 10.65,85.6, 15,7,4,"TỐT" ),
         new PlaceInformation("Vĩnh Bảo - Hải Phòng", 20.684184, 106.476059, 33.75, 71.38, 3.14,10.78,85.4, 20,6, 7,"TỐT" ),
     };
 
