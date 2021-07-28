@@ -1,4 +1,5 @@
 package com.example.iotapp;
+
 import android.annotation.SuppressLint;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,23 +32,31 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
     private GoogleMap mMap;
     SupportMapFragment mapFragment;
     SearchView searchView;
+    //static List<PlaceInformation> places = new ArrayList<>();
+    static int placesListLength = 0;
+    PlaceInformation place = null;
+    double distance = 0;
+
+    public static PlaceInformation[] places = new PlaceInformation[]{
+        new PlaceInformation("Mê Linh - Hà Nội", 21.184412, 105.702209, 31.34, 84.44, 3.29, 10.78,85.4, 20,5,7,"TỐT" ),
+        new PlaceInformation("Hoài Đức - Hà Nội", 21.028115, 105.695343, 32.78, 85.18, 3.61, 11.23,85.7,5,7,8,"KÉM" ),
+        new PlaceInformation("Chương Mỹ - Hà Nội", 20.887683, 105.658264, 33.17, 84.57, 4.14,10.65,85.6, 15,5,9,"TỐT" ),
+        new PlaceInformation("Phúc Yên - Vĩnh Phúc", 21.351421, 105.739288, 33.28, 85.42, 2.31, 10.78,85.4, 20,5,5,"KÉM" ),
+        new PlaceInformation("Ý Yên - Nam Định", 20.332394, 106.010513, 32.59, 79.34,2.78,11.23,85.7,5,7, 6, "KÉM" ),
+        new PlaceInformation("Xuân Trường - Nam Định", 20.308569, 106.357956, 32.97, 79.51, 2.67, 10.65,85.6, 15,7,6, "KÉM" ),
+        new PlaceInformation("Lạng Giang - Bắc Giang", 21.377639, 106.247406, 32.32, 84.84, 2.85,10.78,85.4, 20,5, 6,"KÉM" ),
+        new PlaceInformation("Từ Sơn - Bắc Ninh", 21.128067, 105.956268, 32.84, 84.27, 3.52, 10.65,85.6, 15,7,8,"TỐT" ),
+        new PlaceInformation("Sóc Sơn - Hà Nội", 21.275298, 105.821686, 32.63, 84.28, 3.31,10.78,85.4, 20,6, 7,"KÉM" ),
+        new PlaceInformation("Hiệp Hòa - Bắc Giang", 21.335432, 105.960388, 32.89, 84.26, 3.17,10.78,85.4, 20,5, 7,"TỐT" ),
+        new PlaceInformation("Lập Thạch - Vĩnh Phúc", 21.433895, 105.437164, 32.67, 84.05, 2.36, 10.65,85.6, 15,7,5,"KÉM" ),
+        new PlaceInformation("Vĩnh Bảo - Hải Phòng", 20.684184, 106.476059, 33.75, 71.38, 3.14,10.78,85.4, 20,6, 7,"TỐT" ),
+    };
+
     List<LatLng> latLngList = new ArrayList<>();
 
-    String places = null;
-    public static String[] locationList = new String[] {
-            "Bách Khoa Hà Nội",
-            "Phương Mai",
-            "Đống Đa",
-            "Giáp Bát",
-            "Long Biên",
-            "Hoàng Mai",
-            "Bạch Mai",
-            "Minh Khai"
-    };
-    final List<Pair<Double, Double>> latitudeList = new ArrayList<>();
-    int locationListLength = locationList.length;
 
     public float getDistance(LatLng my_latlong, LatLng frnd_latlong) {
+
         Location l1 = new Location("One");
         l1.setLatitude(my_latlong.latitude);
         l1.setLongitude(my_latlong.longitude);
@@ -56,31 +65,23 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
         l2.setLongitude(frnd_latlong.longitude);
 
         return l1.distanceTo(l2);
-
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subscribe_more);
+        placesListLength = places.length;
+
         searchView = findViewById(R.id.search_map);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
 
-        latitudeList.add(new Pair<>(21.005106, 105.843371));
-        latitudeList.add(new Pair<>(21.004224, 105.839673));
-        latitudeList.add(new Pair<>(21.009368, 105.824322));
-        latitudeList.add(new Pair<>(20.983507, 105.841220));
-        latitudeList.add(new Pair<>(21.018348, 105.882664));
-        latitudeList.add(new Pair<>(20.970246, 105.846137));
-        latitudeList.add(new Pair<>(20.999733, 105.850519));
-        latitudeList.add(new Pair<>(20.995505, 105.856822));
-
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public boolean onQueryTextSubmit(String query) {
+                if(searchView.getQuery() == null) return false;
                 String location = searchView.getQuery().toString();
                 List<Address> addressList = null;
                 Geocoder geocoder = new Geocoder((SubscribeMore.this));
@@ -92,12 +93,12 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 assert addressList != null;
                 Address address = addressList.get(0);
                 LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 
                 float minDistance = getDistance(latLng,latLngList.get(0));
                 int iDistance = 0;
 
-                for(int i = 1; i < locationListLength ; i++) {
+                for(int i = 1; i < placesListLength; i++) {
                     if(minDistance > getDistance(latLng,latLngList.get(i))){
                         minDistance = getDistance(latLng,latLngList.get(i));
                         iDistance = i;
@@ -105,22 +106,25 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 }
                 TextView textView = findViewById(R.id.nearest_place);
                 TextView tv = findViewById(R.id.place);
-                if(minDistance < 1000) {
-                    String text = "Your nearest locaghgfghgtion is";
+                if(minDistance < 25000) {
+                    String text = "Địa điểm gần nhất là";
                     textView.setText(text);
-                    text = locationList[iDistance];
+                    text = places[iDistance].getName();
                     tv.setText(text);
                     TextView textView1 = findViewById(R.id.subscribe);
-                    places = locationList[iDistance];
-                    if (!SubscribedList.subcribedList.contains(places)) {
-                        textView1.setText("Subscribe");
+                    place = places[iDistance];
+                    distance = (double)minDistance/1000.0;
+                    if (!SubscribedList.subcribedList.contains(place)) {
+                        textView1.setText("Đăng ký");
                     } else {
-                        textView1.setText("Unsubscribe");
+                        textView1.setText("Hủy đăng ký");
                     }
                 }
                 else {
-                    String text = "Sorry! There are no places near the location you've chosen.";
+                    String text = "Không có địa điểm nào gần hơn 20km";
                     textView.setText(text);
+                    tv.setText("");
+                    place = null;
                 }
                 return false;
             }
@@ -154,37 +158,27 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        for(int i = 0; i < locationListLength ; i++){
-/*            List<Address> addressList = null;
-            Geocoder geocoder = new Geocoder((SubscribeMore.this));
-            try {
-                addressList = geocoder.getFromLocationName(locationList[i], 1);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Address address = addressList.get(0);*/
-            LatLng latLng = new LatLng(latitudeList.get(i).first, latitudeList.get(i).second);
+        for(int i = 0; i < placesListLength; i++){
+            LatLng latLng = new LatLng(places[i].getLatitude(), places[i].getLongtitude());
             latLngList.add(latLng);
-            mMap.addMarker(new MarkerOptions().position(latLng).title(locationList[i]).icon(BitmapDescriptorFactory.fromBitmap(iconMarker(i))));
+            mMap.addMarker(new MarkerOptions().position(latLng).title(places[i].getName()).icon(BitmapDescriptorFactory.fromBitmap(iconMarker(places[i].getEvaluation()))));
         }
         // Add a marker in Sydney and move the camera
-        LatLng thanhnhan = new LatLng(21.002931, 105.857719);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(thanhnhan));
-        mMap.addMarker(new MarkerOptions().position(thanhnhan).title("Thanh Nhàn").icon(BitmapDescriptorFactory.fromBitmap(iconMarker(10))));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(thanhnhan, 15));
+        LatLng center = new LatLng(20.997823, 105.841030);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(center));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(center, 9));
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onMapClick(LatLng latLng) {
                 //mMap.addMarker(new MarkerOptions().position(latLng).title("Your Location"));
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
 
                 float minDistance = getDistance(latLng,latLngList.get(0));
                 int iDistance = 0;
 
-                for(int i = 1; i < locationListLength ; i++) {
+                for(int i = 1; i < placesListLength; i++) {
                     if(minDistance > getDistance(latLng,latLngList.get(i))){
                         minDistance = getDistance(latLng,latLngList.get(i));
                         iDistance = i;
@@ -192,57 +186,64 @@ public class SubscribeMore extends AppCompatActivity implements OnMapReadyCallba
                 }
                 TextView textView = findViewById(R.id.nearest_place);
                 TextView tv = findViewById(R.id.place);
-                if(minDistance < 1000) {
-                    String text = "Your nearest location is";
+                if(minDistance < 25000) {
+                    String text = "Địa điểm gần nhất là ";
                     textView.setText(text);
-                    text = locationList[iDistance];
+                    text = places[iDistance].getName();
                     tv.setText(text);
                     TextView textView1 = findViewById(R.id.subscribe);
-                    places = locationList[iDistance];
-                    if(SubscribedList.subcribedList.contains(places)){
-                        textView1.setText("Unsubscribe");
+                    place = places[iDistance];
+                    distance = (double)minDistance/1000.0;
+                    if (!SubscribedList.subcribedList.contains(place)) {
+                        textView1.setText("Đăng ký");
+                    } else {
+                        textView1.setText("Hủy đăng ký");
                     }
-                    else textView1.setText("Subscribe");
                 }
                 else {
-                    String text = "Sorry! There are no places near the location you've chosen.";
+                    String text = "Không có địa điểm nào gần hơn 20km!";
                     textView.setText(text);
+                    tv.setText("");
+                    place = null;
                 }
             }
         });
     }
 
-    @SuppressLint({"SetTextI18n", "ShowToast"})
     public void subscribeClick(View v)
     {
         Toast t;
         TextView textView = findViewById(R.id.subscribe);
         int len = SubscribedList.subcribedList.size();
-        if(places != null && SubscribedList.subcribedList.contains(places)){
+        if(place != null && SubscribedList.subcribedList.contains(place)){
             sub = true;
-            textView.setText("Subscribe");
-            t = Toast.makeText(this, "Unsubscribed", Toast.LENGTH_SHORT);
-            List<String> tempList = new ArrayList<>();
+            textView.setText("Đăng ký");
+            t = Toast.makeText(this, "Đã hủy đăng ký", Toast.LENGTH_SHORT);
+            List<Pair<PlaceInformation,Double>> tempList = new ArrayList<>();
             for(int i = 0; i < len; i++){
-                String location = SubscribedList.subcribedList.get(i);
-                if(!places.equals(location)){
-                    tempList.add(location);
+                PlaceInformation location = SubscribedList.subcribedList.get(i);
+                double distance_i = SubscribedList.distanceList.get(i);
+                if(!place.equals(location)){
+                    tempList.add(new Pair<>(location,distance_i));
                 }
             }
             len--;
             SubscribedList.subcribedList.clear();
+            SubscribedList.distanceList.clear();
             for(int i = 0; i < len; i++){
-                SubscribedList.subcribedList.add(tempList.get(i));
+                SubscribedList.subcribedList.add(tempList.get(i).first);
+                SubscribedList.distanceList.add(tempList.get(i).second);
             }
         }
-        else if(places != null && !SubscribedList.subcribedList.contains(places)){
+        else if(place != null && !SubscribedList.subcribedList.contains(place)){
             sub = false;
-            textView.setText("Unsubscribe");
-            t = Toast.makeText(this, "Subscribed", Toast.LENGTH_SHORT);
-            SubscribedList.subcribedList.add(places);
+            textView.setText("Hủy đăng ký");
+            t = Toast.makeText(this, "Đã đăng ký", Toast.LENGTH_SHORT);
+            SubscribedList.subcribedList.add(place);
+            SubscribedList.distanceList.add(distance);
         }
         else{
-            t = Toast.makeText(this, "None", Toast.LENGTH_SHORT);
+            t = Toast.makeText(this, "", Toast.LENGTH_SHORT);
         }
         t.show();
     }

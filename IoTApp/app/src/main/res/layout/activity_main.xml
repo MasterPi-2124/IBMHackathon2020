@@ -5,7 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity" android:fitsSystemWindows="true">
+        tools:context=".MainActivity"
+        android:fitsSystemWindows="true">
 
     <ImageView
             android:id="@+id/imageView"
@@ -35,7 +36,7 @@
                 android:layout_height="36dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="0dp"
-                android:text="Subscribe list"
+                android:text="Đã đăng ký"
                 android:elevation="3dp"
                 android:background="@drawable/buttons"
                 android:textColor="#ffffff"
@@ -50,7 +51,7 @@
                 android:layout_height="36dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="40dp"
-                android:text="Subscribe more"
+                android:text="Đăng ký thêm"
                 android:elevation="3dp"
                 android:background="@drawable/buttons"
                 android:textColor="#ffffff"
@@ -66,14 +67,14 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="80dp"
-                android:text="Historic Warning"
+                android:text="Thông báo"
                 android:elevation="3dp"
                 android:background="@drawable/buttons"
                 android:textColor="#ffffff"
                 android:textColorHint="#877B7B"
                 android:textSize="8pt"
                 android:textStyle="bold"
-                android:onClick="historicWarningClick"/>
+                android:onClick="notificationClick"/>
 
     </LinearLayout>
     <TextView
